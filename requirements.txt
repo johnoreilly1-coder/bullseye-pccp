@@ -1,0 +1,33 @@
+# ============================================================
+# Requirements -- bullseye-pccp reproducibility artifact
+# ============================================================
+# Python 3.10+ recommended
+# CUDA 11.8+ required for GPU training
+#
+# Install with:
+#   pip install -r requirements.txt
+#
+# Verified on Lambda Labs A100-SXM4 40GB, Ubuntu 22.04
+# ============================================================
+
+# Deep learning
+torch==2.1.0
+torchvision==0.16.0
+
+# Data handling
+numpy==1.24.4
+pandas==2.0.3
+Pillow==10.0.1
+
+# Metrics
+scikit-learn==1.3.2
+
+# Image quality metrics (PSNR, SSIM verification)
+scikit-image==0.21.0
+
+# Progress bars
+tqdm==4.66.1
+
+# Statistical analysis (optional -- fallback to pure Python)
+# If not available, run_analysis.py uses lookup table approximation
+scipy==1.11.4
