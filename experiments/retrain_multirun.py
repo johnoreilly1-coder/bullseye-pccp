@@ -10,6 +10,18 @@
 # clean control run. This eliminates seed-to-seed variation as
 # a confounding factor and enables a paired statistical analysis.
 #
+# Poison injection method -- REPLACEMENT not ADDITION:
+#   The 9,551 poison images REPLACE their corresponding base
+#   images in the 191,027-image training set. Both poisoned
+#   and control conditions therefore train on exactly 191,027
+#   images. The only difference between conditions is whether
+#   those 9,551 specific images contain optimised perturbations.
+#
+#   Injecting by addition (ConcatDataset) would confound the
+#   poisoning effect with the effect of adding extra PE-negative
+#   gradient signal -- an additional 9,551 clean PE-negative
+#   images would independently shift PE classification scores.
+#
 # Usage:
 #   PYTHONPATH=$(pwd) python experiments/retrain_multirun.py \
 #       --frontal_idx 12
@@ -22,14 +34,6 @@
 #
 # Matched seeds (same as retrain_control.py):
 #   [100, 200, 300, 400, 500]
-#
-# Notes:
-#   - Poison set must already exist (run craft_poison_single.py first)
-#   - 10 epochs per run -- sufficient based on Stage 2 convergence
-#     analysis (peak at epoch 9, no improvement thereafter)
-#   - Best-AUC checkpoint selected per run for PE score recording
-#   - Same validation set used for checkpoint selection and
-#     evaluation -- acknowledged as a limitation (selection bias)
 # ============================================================
 
 import torch
@@ -40,12 +44,11 @@ import argparse
 import numpy as np
 import random
 from pathlib import Path
-from torch.utils.data import DataLoader, ConcatDataset
+from torch.utils.data import Dataset, DataLoader
 
 try:
     from models.chexpert_dataset import (
-        CheXpertDataset, get_transforms, LABEL_COLS,
-        PoisonDataset
+        CheXpertDataset, get_transforms, LABEL_COLS
     )
     from models.densenet_model import build_densenet121
     from attacks.bullseye_polytope import (
@@ -89,6 +92,78 @@ CONFIG = {
 }
 
 
+class PoisonedCheXpertDataset(Dataset):
+    """
+    CheXpert training dataset with poison images injected by
+    REPLACEMENT -- not addition.
+
+    The 9,551 base images (identified by their index in the
+    training set) are replaced with their poisoned counterparts.
+    All other images remain unchanged.
+
+    This ensures the poisoned and control datasets have exactly
+    the same size and composition -- the only difference is
+    whether the 9,551 specific images contain perturbations.
+
+    Parameters
+    ----------
+    base_dataset   : CheXpertDataset  full clean training set
+    poison_images  : torch.Tensor  [N, 3, H, W]  poisoned images
+    poison_labels  : torch.Tensor  [N, 14]        their labels
+    base_indices   : list of int   indices into base_dataset
+                     that are replaced by poison_images
+    transform      : callable  augmentation applied to all images
+    """
+
+    def __init__(self, base_dataset, poison_images,
+                 poison_labels, base_indices, transform=None):
+        self.base_dataset   = base_dataset
+        self.poison_images  = poison_images
+        self.poison_labels  = poison_labels
+        self.transform      = transform
+
+        # Build lookup: training set index -> poison index
+        self.poison_map = {
+            int(idx): i
+            for i, idx in enumerate(base_indices)
+        }
+
+        n_replaced = len(self.poison_map)
+        n_total    = len(base_dataset)
+        print(f"PoisonedCheXpertDataset: {n_total:,} total images")
+        print(f"  Replaced with poison:  {n_replaced:,} images")
+        print(f"  Unchanged:             {n_total - n_replaced:,} images")
+        print(f"  Dataset size unchanged: {n_total:,} == {n_total:,}")
+
+    def __len__(self):
+        return len(self.base_dataset)
+
+    def __getitem__(self, idx):
+        if idx in self.poison_map:
+            # Return poisoned version of this image
+            poison_idx = self.poison_map[idx]
+            image  = self.poison_images[poison_idx].clone()
+            labels = self.poison_labels[poison_idx].clone()
+
+            # Apply augmentation to poison images
+            # (same augmentation pipeline as clean images)
+            if self.transform is not None:
+                # Poison images are pre-normalised tensors --
+                # apply spatial augmentation only
+                if torch.rand(1).item() > 0.5:
+                    image = torch.flip(image, dims=[2])
+                _, H, W = image.shape
+                if H > 224 and W > 224:
+                    top  = torch.randint(0, H-224+1, (1,)).item()
+                    left = torch.randint(0, W-224+1, (1,)).item()
+                    image = image[:, top:top+224, left:left+224]
+        else:
+            # Return clean version of this image
+            image, labels = self.base_dataset[idx]
+
+        return image, labels
+
+
 def set_seed(seed):
     """
     Set all random seeds for reproducibility.
@@ -108,24 +183,10 @@ def get_device():
 
 
 def compute_auc_and_pe_score(model, val_loader, device,
-                               target_frontal_idx):
+                              target_frontal_idx):
     """
     Compute mean AUC across all 14 labels and PE classification
     score for the target patient on the validation set.
-
-    Parameters
-    ----------
-    model              : nn.Module  (eval mode)
-    val_loader         : DataLoader
-    device             : torch.device
-    target_frontal_idx : int  index of target in validation set
-
-    Returns
-    -------
-    mean_auc  : float  mean AUC across 14 labels
-    pe_score  : float  sigmoid output for target patient PE label
-    all_preds : np.ndarray  [N, 14]  predictions for all patients
-    all_labels: np.ndarray  [N, 14]  ground truth labels
     """
     model.eval()
     all_preds  = []
@@ -142,53 +203,35 @@ def compute_auc_and_pe_score(model, val_loader, device,
     all_preds  = np.concatenate(all_preds,  axis=0)
     all_labels = np.concatenate(all_labels, axis=0)
 
-    # Mean AUC across all 14 labels
     aucs = []
     for i in range(14):
         if len(np.unique(all_labels[:, i])) > 1:
             aucs.append(roc_auc_score(all_labels[:, i],
                                        all_preds[:, i]))
     mean_auc = float(np.mean(aucs)) if aucs else 0.0
-
-    # PE score for target patient
     pe_score = float(all_preds[target_frontal_idx,
                                 PLEURAL_EFFUSION_IDX])
 
-    return mean_auc, pe_score, all_preds, all_labels
+    return mean_auc, pe_score
 
 
 def run_single(frontal_idx, seed, config, device):
     """
     Run one poisoned retraining with a specific seed.
-
-    Parameters
-    ----------
-    frontal_idx : int  target patient frontal index
-    seed        : int  matched seed for this run
-    config      : dict
-    device      : torch.device
-
-    Returns
-    -------
-    result : dict  {seed, best_auc, pe_score, pe_scores_per_epoch}
     """
     print(f"\n  Seed {seed} -- starting")
 
     # Set seed before any model or data initialisation
     set_seed(seed)
 
-    # Build model -- classification layer randomly initialised
-    # using this seed (matched to control run with same seed)
+    # Build model
     model = build_densenet121(num_classes=14, pretrained=True)
     model = model.to(device)
 
-    # Load pretrained weights, re-initialise classifier layer
-    # with seed-controlled randomness
+    # Load Stage 2 pretrained weights
     ckpt = torch.load(config["target_checkpoint"],
                        map_location=device)
-    model.load_state_dict(
-        ckpt.get("model_state_dict", ckpt)
-    )
+    model.load_state_dict(ckpt.get("model_state_dict", ckpt))
 
     # Re-initialise classifier with current seed
     torch.manual_seed(seed)
@@ -205,10 +248,15 @@ def run_single(frontal_idx, seed, config, device):
         save_dir    = poison_dir,
         poison_rate = config["poison_rate"],
     )
+    base_indices = meta["base_indices"]
 
-    # Build poisoned training dataset
+    print(f"  Poison set loaded: {len(poison_images):,} images")
+    print(f"  Injection method: REPLACEMENT (not addition)")
+    print(f"  Training set size will remain: 191,027 images")
+
+    # Build training dataset with poison injected by replacement
     train_transform = get_transforms(mode="train", image_size=224)
-    train_dataset   = CheXpertDataset(
+    base_dataset    = CheXpertDataset(
         csv_path         = config["train_csv"],
         image_dir        = config["image_dir"],
         transform        = train_transform,
@@ -216,20 +264,26 @@ def run_single(frontal_idx, seed, config, device):
         frontal_only     = True,
     )
 
-    # Combine clean training data with poison images
-    poison_dataset = PoisonDataset(
+    poisoned_dataset = PoisonedCheXpertDataset(
+        base_dataset  = base_dataset,
         poison_images = poison_images,
         poison_labels = poison_labels,
+        base_indices  = base_indices,
         transform     = train_transform,
     )
-    combined_dataset = ConcatDataset([train_dataset, poison_dataset])
 
-    # Seed-controlled DataLoader (controls batch ordering)
+    # Verify dataset sizes match
+    assert len(poisoned_dataset) == len(base_dataset), (
+        f"Dataset size mismatch: poisoned {len(poisoned_dataset)} "
+        f"!= clean {len(base_dataset)}"
+    )
+
+    # Seed-controlled DataLoader
     generator = torch.Generator()
     generator.manual_seed(seed)
 
     train_loader = DataLoader(
-        combined_dataset,
+        poisoned_dataset,
         batch_size  = config["batch_size"],
         shuffle     = True,
         num_workers = config["num_workers"],
@@ -237,7 +291,7 @@ def run_single(frontal_idx, seed, config, device):
         pin_memory  = True,
     )
 
-    # Validation loader (no shuffle -- fixed order)
+    # Validation loader
     val_transform = get_transforms(mode="val", image_size=224)
     val_dataset   = CheXpertDataset(
         csv_path         = config["valid_csv"],
@@ -265,12 +319,11 @@ def run_single(frontal_idx, seed, config, device):
     )
     criterion = nn.BCEWithLogitsLoss()
 
-    best_auc        = 0.0
-    best_pe_score   = 0.0
-    pe_per_epoch    = []
+    best_auc      = 0.0
+    best_pe_score = 0.0
+    pe_per_epoch  = []
 
     for epoch in range(1, config["epochs"] + 1):
-        # Training
         model.train()
         for images, labels in train_loader:
             images = images.to(device)
@@ -280,8 +333,7 @@ def run_single(frontal_idx, seed, config, device):
             loss.backward()
             optimizer.step()
 
-        # Validation
-        mean_auc, pe_score, _, _ = compute_auc_and_pe_score(
+        mean_auc, pe_score = compute_auc_and_pe_score(
             model, val_loader, device, frontal_idx
         )
         scheduler.step(mean_auc)
@@ -295,10 +347,13 @@ def run_single(frontal_idx, seed, config, device):
             best_pe_score = pe_score
 
     result = {
-        "seed":              seed,
-        "best_auc":          round(best_auc, 4),
-        "pe_score":          round(best_pe_score, 4),
+        "seed":               seed,
+        "best_auc":           round(best_auc, 4),
+        "pe_score":           round(best_pe_score, 4),
         "pe_scores_per_epoch": pe_per_epoch,
+        "injection_method":   "replacement",
+        "n_train_images":     len(poisoned_dataset),
+        "n_poison_images":    len(poison_images),
     }
     print(f"  Seed {seed} -- done  "
           f"best AUC {best_auc:.4f}  PE score {best_pe_score:.4f}")
@@ -307,19 +362,15 @@ def run_single(frontal_idx, seed, config, device):
 
 def run_multirun(frontal_idx, config):
     """
-    Run 5 poisoned retraining runs for a target patient,
-    one per matched seed.
+    Run 5 poisoned retraining runs for a target patient.
     """
     print("=" * 60)
     print(f"MULTI-RUN POISONED RETRAINING -- IDX {frontal_idx}")
     print(f"Seeds: {config['seeds']}  (matched to control)")
     print(f"Poison rate: {config['poison_rate']*100:.0f}%")
+    print(f"Injection: REPLACEMENT (dataset size unchanged)")
     print(f"Epochs: {config['epochs']}")
     print("=" * 60)
-
-    if frontal_idx not in TARGET_PATIENTS:
-        print(f"Warning: idx {frontal_idx} not in standard "
-              f"6-patient set")
 
     device     = get_device()
     result_dir = (
@@ -330,46 +381,39 @@ def run_multirun(frontal_idx, config):
     all_results = []
 
     for seed in config["seeds"]:
-        run_result = run_single(
-            frontal_idx, seed, config, device
-        )
+        run_result = run_single(frontal_idx, seed, config, device)
         all_results.append(run_result)
 
-        # Save individual run result
         run_dir = result_dir / f"run_{seed}"
         run_dir.mkdir(parents=True, exist_ok=True)
         with open(run_dir / "scores.json", "w") as f:
             json.dump(run_result, f, indent=2)
 
-    # Aggregate summary
     pe_scores = [r["pe_score"] for r in all_results]
     aucs      = [r["best_auc"] for r in all_results]
 
     def mean(x): return sum(x) / len(x)
     def std(x):
         m = mean(x)
-        return (sum((v - m)**2 for v in x) / (len(x)-1))**0.5
+        return (sum((v-m)**2 for v in x) / (len(x)-1))**0.5
 
     summary = {
-        "frontal_idx":   frontal_idx,
-        "patient":       TARGET_PATIENTS.get(
-            frontal_idx, {}
-        ).get("patient", "unknown"),
-        "group":         TARGET_PATIENTS.get(
-            frontal_idx, {}
-        ).get("group", "unknown"),
-        "seeds":         config["seeds"],
-        "poison_rate":   config["poison_rate"],
-        "epochs":        config["epochs"],
-        "condition":     "poisoned",
-        "pe_scores":     pe_scores,
-        "pe_mean":       round(mean(pe_scores), 4),
-        "pe_std":        round(std(pe_scores), 4),
-        "pe_min":        round(min(pe_scores), 4),
-        "pe_max":        round(max(pe_scores), 4),
-        "auc_mean":      round(mean(aucs), 4),
-        "auc_std":       round(std(aucs), 4),
-        "runs":          all_results,
+        "frontal_idx":     frontal_idx,
+        "patient":         TARGET_PATIENTS.get(frontal_idx, {}).get("patient", "unknown"),
+        "group":           TARGET_PATIENTS.get(frontal_idx, {}).get("group",   "unknown"),
+        "seeds":           config["seeds"],
+        "poison_rate":     config["poison_rate"],
+        "epochs":          config["epochs"],
+        "condition":       "poisoned",
+        "injection_method":"replacement",
+        "pe_scores":       pe_scores,
+        "pe_mean":         round(mean(pe_scores), 4),
+        "pe_std":          round(std(pe_scores),  4),
+        "pe_min":          round(min(pe_scores),  4),
+        "pe_max":          round(max(pe_scores),  4),
+        "auc_mean":        round(mean(aucs), 4),
+        "auc_std":         round(std(aucs),  4),
+        "runs":            all_results,
     }
 
     with open(result_dir / "summary.json", "w") as f:
@@ -381,7 +425,7 @@ def run_multirun(frontal_idx, config):
     print(f"  Mean: {summary['pe_mean']:.4f}  "
           f"Std: {summary['pe_std']:.4f}")
     print(f"  Mean AUC: {summary['auc_mean']:.4f}")
-    print(f"  Results: {result_dir / 'summary.json'}")
+    print(f"  Injection: replacement (191,027 images both conditions)")
     print(f"{'='*60}")
 
     return summary
@@ -392,11 +436,9 @@ if __name__ == "__main__":
         description="Multi-run poisoned retraining with matched seeds"
     )
     parser.add_argument(
-        "--frontal_idx",
-        type=int,
-        required=True,
-        help=f"Target patient frontal index. "
-             f"Standard targets: {list(TARGET_PATIENTS.keys())}"
+        "--frontal_idx", type=int, required=True,
+        help=f"Target patient. Standard targets: "
+             f"{list(TARGET_PATIENTS.keys())}"
     )
     args = parser.parse_args()
     run_multirun(args.frontal_idx, CONFIG)
