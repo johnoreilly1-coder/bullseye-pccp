@@ -1,0 +1,420 @@
+{
+  "threshold": 0.5,
+  "threshold_note": "Illustrative value only. Manufacturer applies their proprietary operating threshold internally and reports stability evidence, not the threshold.",
+  "n_patients": 202,
+  "n_runs": 5,
+  "n_straddlers": 21,
+  "pct_straddlers": 10.4,
+  "n_pe_positive": 11,
+  "n_pe_negative": 10,
+  "n_pe_unknown": 0,
+  "stability_summary": {
+    "mean_std": 0.0471,
+    "max_std": 0.2165,
+    "max_std_idx": 143,
+    "n_gt010": 22,
+    "n_gt005": 83,
+    "n_lt002": 71
+  },
+  "straddlers": [
+    {
+      "frontal_idx": 44,
+      "pe_label": 1,
+      "scores": [
+        0.3569,
+        0.2912,
+        0.1912,
+        0.5726,
+        0.1465
+      ],
+      "mean": 0.3117,
+      "std": 0.1676,
+      "min": 0.1465,
+      "max": 0.5726,
+      "n_alerts": 1,
+      "alert_prop": 0.2,
+      "alert_str": "1/5",
+      "clinical_risk": "HIGH -- PE+ flagged in 1 run only"
+    },
+    {
+      "frontal_idx": 143,
+      "pe_label": 1,
+      "scores": [
+        0.2879,
+        0.2823,
+        0.2537,
+        0.7709,
+        0.4491
+      ],
+      "mean": 0.4088,
+      "std": 0.2165,
+      "min": 0.2537,
+      "max": 0.7709,
+      "n_alerts": 1,
+      "alert_prop": 0.2,
+      "alert_str": "1/5",
+      "clinical_risk": "HIGH -- PE+ flagged in 1 run only"
+    },
+    {
+      "frontal_idx": 179,
+      "pe_label": 1,
+      "scores": [
+        0.5184,
+        0.2386,
+        0.251,
+        0.4525,
+        0.3262
+      ],
+      "mean": 0.3573,
+      "std": 0.1239,
+      "min": 0.2386,
+      "max": 0.5184,
+      "n_alerts": 1,
+      "alert_prop": 0.2,
+      "alert_str": "1/5",
+      "clinical_risk": "HIGH -- PE+ flagged in 1 run only"
+    },
+    {
+      "frontal_idx": 80,
+      "pe_label": 1,
+      "scores": [
+        0.6562,
+        0.4976,
+        0.4379,
+        0.6445,
+        0.5255
+      ],
+      "mean": 0.5523,
+      "std": 0.095,
+      "min": 0.4379,
+      "max": 0.6562,
+      "n_alerts": 3,
+      "alert_prop": 0.6,
+      "alert_str": "3/5",
+      "clinical_risk": "MODERATE -- PE+ flagged in 3 runs"
+    },
+    {
+      "frontal_idx": 8,
+      "pe_label": 1,
+      "scores": [
+        0.5772,
+        0.6331,
+        0.4477,
+        0.7862,
+        0.711
+      ],
+      "mean": 0.631,
+      "std": 0.1294,
+      "min": 0.4477,
+      "max": 0.7862,
+      "n_alerts": 4,
+      "alert_prop": 0.8,
+      "alert_str": "4/5",
+      "clinical_risk": "LOW-MODERATE -- PE+ flagged in 4 runs"
+    },
+    {
+      "frontal_idx": 74,
+      "pe_label": 1,
+      "scores": [
+        0.7749,
+        0.3321,
+        0.7114,
+        0.719,
+        0.8256
+      ],
+      "mean": 0.6726,
+      "std": 0.1959,
+      "min": 0.3321,
+      "max": 0.8256,
+      "n_alerts": 4,
+      "alert_prop": 0.8,
+      "alert_str": "4/5",
+      "clinical_risk": "LOW-MODERATE -- PE+ flagged in 4 runs"
+    },
+    {
+      "frontal_idx": 101,
+      "pe_label": 1,
+      "scores": [
+        0.6628,
+        0.4111,
+        0.5494,
+        0.8216,
+        0.5229
+      ],
+      "mean": 0.5936,
+      "std": 0.1557,
+      "min": 0.4111,
+      "max": 0.8216,
+      "n_alerts": 4,
+      "alert_prop": 0.8,
+      "alert_str": "4/5",
+      "clinical_risk": "LOW-MODERATE -- PE+ flagged in 4 runs"
+    },
+    {
+      "frontal_idx": 104,
+      "pe_label": 1,
+      "scores": [
+        0.6343,
+        0.7053,
+        0.4836,
+        0.5073,
+        0.6173
+      ],
+      "mean": 0.5896,
+      "std": 0.0924,
+      "min": 0.4836,
+      "max": 0.7053,
+      "n_alerts": 4,
+      "alert_prop": 0.8,
+      "alert_str": "4/5",
+      "clinical_risk": "LOW-MODERATE -- PE+ flagged in 4 runs"
+    },
+    {
+      "frontal_idx": 145,
+      "pe_label": 1,
+      "scores": [
+        0.5909,
+        0.4147,
+        0.7064,
+        0.7453,
+        0.6641
+      ],
+      "mean": 0.6243,
+      "std": 0.1304,
+      "min": 0.4147,
+      "max": 0.7453,
+      "n_alerts": 4,
+      "alert_prop": 0.8,
+      "alert_str": "4/5",
+      "clinical_risk": "LOW-MODERATE -- PE+ flagged in 4 runs"
+    },
+    {
+      "frontal_idx": 183,
+      "pe_label": 1,
+      "scores": [
+        0.5056,
+        0.4017,
+        0.6249,
+        0.6155,
+        0.6251
+      ],
+      "mean": 0.5546,
+      "std": 0.0992,
+      "min": 0.4017,
+      "max": 0.6251,
+      "n_alerts": 4,
+      "alert_prop": 0.8,
+      "alert_str": "4/5",
+      "clinical_risk": "LOW-MODERATE -- PE+ flagged in 4 runs"
+    },
+    {
+      "frontal_idx": 186,
+      "pe_label": 1,
+      "scores": [
+        0.768,
+        0.47,
+        0.5113,
+        0.6536,
+        0.5308
+      ],
+      "mean": 0.5867,
+      "std": 0.1222,
+      "min": 0.47,
+      "max": 0.768,
+      "n_alerts": 4,
+      "alert_prop": 0.8,
+      "alert_str": "4/5",
+      "clinical_risk": "LOW-MODERATE -- PE+ flagged in 4 runs"
+    },
+    {
+      "frontal_idx": 15,
+      "pe_label": 0,
+      "scores": [
+        0.5586,
+        0.3691,
+        0.4653,
+        0.4241,
+        0.3253
+      ],
+      "mean": 0.4285,
+      "std": 0.0901,
+      "min": 0.3253,
+      "max": 0.5586,
+      "n_alerts": 1,
+      "alert_prop": 0.2,
+      "alert_str": "1/5",
+      "clinical_risk": "MINIMAL -- PE- rarely falsely flagged"
+    },
+    {
+      "frontal_idx": 71,
+      "pe_label": 0,
+      "scores": [
+        0.3972,
+        0.5741,
+        0.3525,
+        0.283,
+        0.2888
+      ],
+      "mean": 0.3791,
+      "std": 0.1188,
+      "min": 0.283,
+      "max": 0.5741,
+      "n_alerts": 1,
+      "alert_prop": 0.2,
+      "alert_str": "1/5",
+      "clinical_risk": "MINIMAL -- PE- rarely falsely flagged"
+    },
+    {
+      "frontal_idx": 102,
+      "pe_label": 0,
+      "scores": [
+        0.4177,
+        0.545,
+        0.2868,
+        0.2914,
+        0.395
+      ],
+      "mean": 0.3872,
+      "std": 0.1062,
+      "min": 0.2868,
+      "max": 0.545,
+      "n_alerts": 1,
+      "alert_prop": 0.2,
+      "alert_str": "1/5",
+      "clinical_risk": "MINIMAL -- PE- rarely falsely flagged"
+    },
+    {
+      "frontal_idx": 167,
+      "pe_label": 0,
+      "scores": [
+        0.1774,
+        0.2602,
+        0.2588,
+        0.5722,
+        0.4
+      ],
+      "mean": 0.3337,
+      "std": 0.1555,
+      "min": 0.1774,
+      "max": 0.5722,
+      "n_alerts": 1,
+      "alert_prop": 0.2,
+      "alert_str": "1/5",
+      "clinical_risk": "MINIMAL -- PE- rarely falsely flagged"
+    },
+    {
+      "frontal_idx": 198,
+      "pe_label": 0,
+      "scores": [
+        0.3546,
+        0.2233,
+        0.1494,
+        0.2998,
+        0.5157
+      ],
+      "mean": 0.3086,
+      "std": 0.1394,
+      "min": 0.1494,
+      "max": 0.5157,
+      "n_alerts": 1,
+      "alert_prop": 0.2,
+      "alert_str": "1/5",
+      "clinical_risk": "MINIMAL -- PE- rarely falsely flagged"
+    },
+    {
+      "frontal_idx": 117,
+      "pe_label": 0,
+      "scores": [
+        0.5687,
+        0.4712,
+        0.5729,
+        0.4457,
+        0.4154
+      ],
+      "mean": 0.4948,
+      "std": 0.0722,
+      "min": 0.4154,
+      "max": 0.5729,
+      "n_alerts": 2,
+      "alert_prop": 0.4,
+      "alert_str": "2/5",
+      "clinical_risk": "LOW -- PE- falsely flagged in 2 runs"
+    },
+    {
+      "frontal_idx": 127,
+      "pe_label": 0,
+      "scores": [
+        0.6428,
+        0.6018,
+        0.324,
+        0.3402,
+        0.2826
+      ],
+      "mean": 0.4383,
+      "std": 0.1699,
+      "min": 0.2826,
+      "max": 0.6428,
+      "n_alerts": 2,
+      "alert_prop": 0.4,
+      "alert_str": "2/5",
+      "clinical_risk": "LOW -- PE- falsely flagged in 2 runs"
+    },
+    {
+      "frontal_idx": 178,
+      "pe_label": 0,
+      "scores": [
+        0.7013,
+        0.4886,
+        0.6463,
+        0.6221,
+        0.4244
+      ],
+      "mean": 0.5765,
+      "std": 0.1155,
+      "min": 0.4244,
+      "max": 0.7013,
+      "n_alerts": 3,
+      "alert_prop": 0.6,
+      "alert_str": "3/5",
+      "clinical_risk": "LOW-MODERATE -- PE- falsely flagged in 3 runs"
+    },
+    {
+      "frontal_idx": 196,
+      "pe_label": 0,
+      "scores": [
+        0.5739,
+        0.5073,
+        0.3995,
+        0.2963,
+        0.5488
+      ],
+      "mean": 0.4652,
+      "std": 0.1156,
+      "min": 0.2963,
+      "max": 0.5739,
+      "n_alerts": 3,
+      "alert_prop": 0.6,
+      "alert_str": "3/5",
+      "clinical_risk": "LOW-MODERATE -- PE- falsely flagged in 3 runs"
+    },
+    {
+      "frontal_idx": 29,
+      "pe_label": 0,
+      "scores": [
+        0.6089,
+        0.6236,
+        0.5102,
+        0.6004,
+        0.4537
+      ],
+      "mean": 0.5594,
+      "std": 0.0739,
+      "min": 0.4537,
+      "max": 0.6236,
+      "n_alerts": 4,
+      "alert_prop": 0.8,
+      "alert_str": "4/5",
+      "clinical_risk": "MODERATE -- PE- falsely flagged in 4 runs"
+    }
+  ]
+}

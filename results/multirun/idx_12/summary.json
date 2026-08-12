@@ -1,0 +1,131 @@
+{
+  "frontal_idx": 12,
+  "patient": "patient64552",
+  "group": "near_0.7",
+  "seeds": [
+    100,
+    200,
+    300,
+    400,
+    500
+  ],
+  "poison_rate": 0.05,
+  "epochs": 10,
+  "condition": "poisoned",
+  "injection_method": "replacement",
+  "pe_scores": [
+    0.4769,
+    0.4522,
+    0.4206,
+    0.5129,
+    0.7329
+  ],
+  "pe_mean": 0.5191,
+  "pe_std": 0.1242,
+  "pe_min": 0.4206,
+  "pe_max": 0.7329,
+  "auc_mean": 0.8166,
+  "auc_std": 0.0163,
+  "runs": [
+    {
+      "seed": 100,
+      "best_auc": 0.8224,
+      "pe_score": 0.4769,
+      "pe_scores_per_epoch": [
+        0.4818,
+        0.4485,
+        0.5217,
+        0.5207,
+        0.4769,
+        0.4633,
+        0.3677,
+        0.3577,
+        0.3102,
+        0.3814
+      ],
+      "injection_method": "replacement",
+      "n_train_images": 191027,
+      "n_poison_images": 9551
+    },
+    {
+      "seed": 200,
+      "best_auc": 0.7957,
+      "pe_score": 0.4522,
+      "pe_scores_per_epoch": [
+        0.3541,
+        0.4522,
+        0.436,
+        0.5407,
+        0.5661,
+        0.4731,
+        0.5836,
+        0.6111,
+        0.5714,
+        0.5298
+      ],
+      "injection_method": "replacement",
+      "n_train_images": 191027,
+      "n_poison_images": 9551
+    },
+    {
+      "seed": 300,
+      "best_auc": 0.8311,
+      "pe_score": 0.4206,
+      "pe_scores_per_epoch": [
+        0.4806,
+        0.5906,
+        0.4754,
+        0.4206,
+        0.1603,
+        0.6144,
+        0.1452,
+        0.3101,
+        0.3354,
+        0.3225
+      ],
+      "injection_method": "replacement",
+      "n_train_images": 191027,
+      "n_poison_images": 9551
+    },
+    {
+      "seed": 400,
+      "best_auc": 0.8032,
+      "pe_score": 0.5129,
+      "pe_scores_per_epoch": [
+        0.3615,
+        0.5096,
+        0.5842,
+        0.5479,
+        0.5129,
+        0.4935,
+        0.3286,
+        0.6227,
+        0.3259,
+        0.3981
+      ],
+      "injection_method": "replacement",
+      "n_train_images": 191027,
+      "n_poison_images": 9551
+    },
+    {
+      "seed": 500,
+      "best_auc": 0.8307,
+      "pe_score": 0.7329,
+      "pe_scores_per_epoch": [
+        0.7329,
+        0.5725,
+        0.6883,
+        0.5197,
+        0.5702,
+        0.6204,
+        0.6157,
+        0.6905,
+        0.7089,
+        0.7297
+      ],
+      "injection_method": "replacement",
+      "n_train_images": 191027,
+      "n_poison_images": 9551
+    }
+  ]
+}

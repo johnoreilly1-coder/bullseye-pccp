@@ -1,0 +1,20 @@
+{
+  "seed": 500,
+  "best_auc": 0.8307,
+  "pe_score": 0.7329,
+  "pe_scores_per_epoch": [
+    0.7329,
+    0.5725,
+    0.6883,
+    0.5197,
+    0.5702,
+    0.6204,
+    0.6157,
+    0.6905,
+    0.7089,
+    0.7297
+  ],
+  "injection_method": "replacement",
+  "n_train_images": 191027,
+  "n_poison_images": 9551
+}
