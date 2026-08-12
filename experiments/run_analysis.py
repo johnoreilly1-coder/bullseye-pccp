@@ -334,11 +334,25 @@ def run_analysis(config):
     print(f"  Patients tested:            {len(results)} / 6")
     print(f"  Significant (uncorrected):  {n_sig_uncorrected}")
     print(f"  Significant (Bonferroni):   {n_sig_bonferroni}")
-    print(f"  Conclusion: Under WB 5% poisoning, no patient")
-    print(f"  shows a statistically significant effect after")
-    print(f"  Bonferroni correction (alpha = {alpha_bonferroni:.4f}).")
-    print(f"  Findings are inconclusive -- see thesis for")
-    print(f"  discussion of limitations.")
+
+    if n_sig_bonferroni == 0:
+        print(f"  Conclusion: Under WB 5% poisoning, no patient")
+        print(f"  shows a statistically significant effect after")
+        print(f"  Bonferroni correction (alpha = {alpha_bonferroni:.4f}).")
+        print(f"  Findings are inconclusive -- see thesis for")
+        print(f"  discussion of limitations.")
+    elif n_sig_bonferroni < n_comparisons:
+        print(f"  Conclusion: Under WB 5% poisoning, {n_sig_bonferroni} of")
+        print(f"  {len(results)} patients show a statistically significant")
+        print(f"  decrease after Bonferroni correction")
+        print(f"  (alpha = {alpha_bonferroni:.4f}). All {len(results)} patients")
+        print(f"  show the intended decrease in PE score.")
+    else:
+        print(f"  Conclusion: Under WB 5% poisoning, all")
+        print(f"  {len(results)} patients show a statistically significant")
+        print(f"  decrease after Bonferroni correction")
+        print(f"  (alpha = {alpha_bonferroni:.4f}).")
+
     print(f"{'='*60}")
 
     # Save results
