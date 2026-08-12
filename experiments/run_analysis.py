@@ -341,7 +341,7 @@ def run_analysis(config):
         print(f"  Bonferroni correction (alpha = {alpha_bonferroni:.4f}).")
         print(f"  Findings are inconclusive -- see thesis for")
         print(f"  discussion of limitations.")
-    elif n_sig_bonferroni < n_comparisons:
+    elif n_sig_bonferroni < config["n_comparisons"]:
         print(f"  Conclusion: Under WB 5% poisoning, {n_sig_bonferroni} of")
         print(f"  {len(results)} patients show a statistically significant")
         print(f"  decrease after Bonferroni correction")
