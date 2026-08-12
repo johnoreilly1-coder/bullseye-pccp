@@ -1,0 +1,450 @@
+[
+  {
+    "frontal_idx": 4,
+    "full_idx": 5,
+    "patient": "patient64545",
+    "pe_prob": 0.5667,
+    "correct": true
+  },
+  {
+    "frontal_idx": 8,
+    "full_idx": 10,
+    "patient": "patient64548",
+    "pe_prob": 0.6912,
+    "correct": true
+  },
+  {
+    "frontal_idx": 12,
+    "full_idx": 15,
+    "patient": "patient64552",
+    "pe_prob": 0.736,
+    "correct": true
+  },
+  {
+    "frontal_idx": 31,
+    "full_idx": 41,
+    "patient": "patient64571",
+    "pe_prob": 0.1096,
+    "correct": false
+  },
+  {
+    "frontal_idx": 37,
+    "full_idx": 48,
+    "patient": "patient64577",
+    "pe_prob": 0.9147,
+    "correct": true
+  },
+  {
+    "frontal_idx": 40,
+    "full_idx": 51,
+    "patient": "patient64580",
+    "pe_prob": 0.9697,
+    "correct": true
+  },
+  {
+    "frontal_idx": 43,
+    "full_idx": 55,
+    "patient": "patient64582",
+    "pe_prob": 0.6313,
+    "correct": true
+  },
+  {
+    "frontal_idx": 44,
+    "full_idx": 56,
+    "patient": "patient64583",
+    "pe_prob": 0.1388,
+    "correct": false
+  },
+  {
+    "frontal_idx": 57,
+    "full_idx": 75,
+    "patient": "patient64596",
+    "pe_prob": 0.39,
+    "correct": false
+  },
+  {
+    "frontal_idx": 64,
+    "full_idx": 85,
+    "patient": "patient64603",
+    "pe_prob": 0.8434,
+    "correct": true
+  },
+  {
+    "frontal_idx": 70,
+    "full_idx": 93,
+    "patient": "patient64609",
+    "pe_prob": 0.504,
+    "correct": true
+  },
+  {
+    "frontal_idx": 73,
+    "full_idx": 96,
+    "patient": "patient64612",
+    "pe_prob": 0.0555,
+    "correct": false
+  },
+  {
+    "frontal_idx": 74,
+    "full_idx": 97,
+    "patient": "patient64613",
+    "pe_prob": 0.407,
+    "correct": false
+  },
+  {
+    "frontal_idx": 75,
+    "full_idx": 99,
+    "patient": "patient64614",
+    "pe_prob": 0.4824,
+    "correct": false
+  },
+  {
+    "frontal_idx": 80,
+    "full_idx": 108,
+    "patient": "patient64619",
+    "pe_prob": 0.4319,
+    "correct": false
+  },
+  {
+    "frontal_idx": 81,
+    "full_idx": 109,
+    "patient": "patient64620",
+    "pe_prob": 0.8906,
+    "correct": true
+  },
+  {
+    "frontal_idx": 84,
+    "full_idx": 112,
+    "patient": "patient64623",
+    "pe_prob": 0.7391,
+    "correct": true
+  },
+  {
+    "frontal_idx": 91,
+    "full_idx": 120,
+    "patient": "patient64630",
+    "pe_prob": 0.8184,
+    "correct": true
+  },
+  {
+    "frontal_idx": 92,
+    "full_idx": 121,
+    "patient": "patient64631",
+    "pe_prob": 0.0823,
+    "correct": false
+  },
+  {
+    "frontal_idx": 94,
+    "full_idx": 123,
+    "patient": "patient64633",
+    "pe_prob": 0.8628,
+    "correct": true
+  },
+  {
+    "frontal_idx": 96,
+    "full_idx": 125,
+    "patient": "patient64635",
+    "pe_prob": 0.261,
+    "correct": false
+  },
+  {
+    "frontal_idx": 97,
+    "full_idx": 126,
+    "patient": "patient64636",
+    "pe_prob": 0.4681,
+    "correct": false
+  },
+  {
+    "frontal_idx": 100,
+    "full_idx": 129,
+    "patient": "patient64639",
+    "pe_prob": 0.9586,
+    "correct": true
+  },
+  {
+    "frontal_idx": 101,
+    "full_idx": 131,
+    "patient": "patient64640",
+    "pe_prob": 0.6757,
+    "correct": true
+  },
+  {
+    "frontal_idx": 104,
+    "full_idx": 134,
+    "patient": "patient64643",
+    "pe_prob": 0.5941,
+    "correct": true
+  },
+  {
+    "frontal_idx": 105,
+    "full_idx": 135,
+    "patient": "patient64644",
+    "pe_prob": 0.922,
+    "correct": true
+  },
+  {
+    "frontal_idx": 106,
+    "full_idx": 136,
+    "patient": "patient64645",
+    "pe_prob": 0.8501,
+    "correct": true
+  },
+  {
+    "frontal_idx": 107,
+    "full_idx": 137,
+    "patient": "patient64646",
+    "pe_prob": 0.334,
+    "correct": false
+  },
+  {
+    "frontal_idx": 110,
+    "full_idx": 140,
+    "patient": "patient64649",
+    "pe_prob": 0.8929,
+    "correct": true
+  },
+  {
+    "frontal_idx": 111,
+    "full_idx": 141,
+    "patient": "patient64650",
+    "pe_prob": 0.7192,
+    "correct": true
+  },
+  {
+    "frontal_idx": 113,
+    "full_idx": 143,
+    "patient": "patient64652",
+    "pe_prob": 0.085,
+    "correct": false
+  },
+  {
+    "frontal_idx": 114,
+    "full_idx": 144,
+    "patient": "patient64653",
+    "pe_prob": 0.0377,
+    "correct": false
+  },
+  {
+    "frontal_idx": 115,
+    "full_idx": 145,
+    "patient": "patient64654",
+    "pe_prob": 0.2267,
+    "correct": false
+  },
+  {
+    "frontal_idx": 116,
+    "full_idx": 146,
+    "patient": "patient64655",
+    "pe_prob": 0.771,
+    "correct": true
+  },
+  {
+    "frontal_idx": 118,
+    "full_idx": 148,
+    "patient": "patient64657",
+    "pe_prob": 0.8435,
+    "correct": true
+  },
+  {
+    "frontal_idx": 120,
+    "full_idx": 150,
+    "patient": "patient64659",
+    "pe_prob": 0.8855,
+    "correct": true
+  },
+  {
+    "frontal_idx": 121,
+    "full_idx": 151,
+    "patient": "patient64660",
+    "pe_prob": 0.5256,
+    "correct": true
+  },
+  {
+    "frontal_idx": 128,
+    "full_idx": 158,
+    "patient": "patient64667",
+    "pe_prob": 0.6207,
+    "correct": true
+  },
+  {
+    "frontal_idx": 129,
+    "full_idx": 159,
+    "patient": "patient64668",
+    "pe_prob": 0.3005,
+    "correct": false
+  },
+  {
+    "frontal_idx": 131,
+    "full_idx": 161,
+    "patient": "patient64670",
+    "pe_prob": 0.4191,
+    "correct": false
+  },
+  {
+    "frontal_idx": 134,
+    "full_idx": 164,
+    "patient": "patient64673",
+    "pe_prob": 0.5041,
+    "correct": true
+  },
+  {
+    "frontal_idx": 135,
+    "full_idx": 165,
+    "patient": "patient64674",
+    "pe_prob": 0.8113,
+    "correct": true
+  },
+  {
+    "frontal_idx": 137,
+    "full_idx": 167,
+    "patient": "patient64676",
+    "pe_prob": 0.1871,
+    "correct": false
+  },
+  {
+    "frontal_idx": 139,
+    "full_idx": 170,
+    "patient": "patient64678",
+    "pe_prob": 0.9486,
+    "correct": true
+  },
+  {
+    "frontal_idx": 142,
+    "full_idx": 173,
+    "patient": "patient64681",
+    "pe_prob": 0.7506,
+    "correct": true
+  },
+  {
+    "frontal_idx": 143,
+    "full_idx": 174,
+    "patient": "patient64682",
+    "pe_prob": 0.3518,
+    "correct": false
+  },
+  {
+    "frontal_idx": 144,
+    "full_idx": 175,
+    "patient": "patient64683",
+    "pe_prob": 0.6055,
+    "correct": true
+  },
+  {
+    "frontal_idx": 145,
+    "full_idx": 176,
+    "patient": "patient64684",
+    "pe_prob": 0.5111,
+    "correct": true
+  },
+  {
+    "frontal_idx": 149,
+    "full_idx": 180,
+    "patient": "patient64688",
+    "pe_prob": 0.7396,
+    "correct": true
+  },
+  {
+    "frontal_idx": 150,
+    "full_idx": 181,
+    "patient": "patient64689",
+    "pe_prob": 0.2697,
+    "correct": false
+  },
+  {
+    "frontal_idx": 151,
+    "full_idx": 182,
+    "patient": "patient64690",
+    "pe_prob": 0.5184,
+    "correct": true
+  },
+  {
+    "frontal_idx": 152,
+    "full_idx": 183,
+    "patient": "patient64691",
+    "pe_prob": 0.2707,
+    "correct": false
+  },
+  {
+    "frontal_idx": 153,
+    "full_idx": 184,
+    "patient": "patient64692",
+    "pe_prob": 0.9613,
+    "correct": true
+  },
+  {
+    "frontal_idx": 155,
+    "full_idx": 186,
+    "patient": "patient64694",
+    "pe_prob": 0.239,
+    "correct": false
+  },
+  {
+    "frontal_idx": 163,
+    "full_idx": 194,
+    "patient": "patient64702",
+    "pe_prob": 0.6687,
+    "correct": true
+  },
+  {
+    "frontal_idx": 164,
+    "full_idx": 195,
+    "patient": "patient64703",
+    "pe_prob": 0.7017,
+    "correct": true
+  },
+  {
+    "frontal_idx": 165,
+    "full_idx": 196,
+    "patient": "patient64704",
+    "pe_prob": 0.8575,
+    "correct": true
+  },
+  {
+    "frontal_idx": 172,
+    "full_idx": 204,
+    "patient": "patient64711",
+    "pe_prob": 0.9359,
+    "correct": true
+  },
+  {
+    "frontal_idx": 176,
+    "full_idx": 208,
+    "patient": "patient64715",
+    "pe_prob": 0.7614,
+    "correct": true
+  },
+  {
+    "frontal_idx": 179,
+    "full_idx": 211,
+    "patient": "patient64718",
+    "pe_prob": 0.2529,
+    "correct": false
+  },
+  {
+    "frontal_idx": 181,
+    "full_idx": 213,
+    "patient": "patient64720",
+    "pe_prob": 0.7125,
+    "correct": true
+  },
+  {
+    "frontal_idx": 183,
+    "full_idx": 215,
+    "patient": "patient64722",
+    "pe_prob": 0.4424,
+    "correct": false
+  },
+  {
+    "frontal_idx": 186,
+    "full_idx": 218,
+    "patient": "patient64725",
+    "pe_prob": 0.5521,
+    "correct": true
+  },
+  {
+    "frontal_idx": 201,
+    "full_idx": 233,
+    "patient": "patient64740",
+    "pe_prob": 0.5581,
+    "correct": true
+  }
+]

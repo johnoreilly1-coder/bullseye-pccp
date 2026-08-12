@@ -1,0 +1,216 @@
+{
+  "control_auc_mean": 0.8181,
+  "control_auc_std": 0.015,
+  "control_auc_per_run": [
+    0.8248,
+    0.8375,
+    0.7986,
+    0.8207,
+    0.8088
+  ],
+  "alpha": 0.05,
+  "alpha_bonferroni": 0.0083,
+  "n_comparisons": 6,
+  "n_significant_bonferroni": 3,
+  "n_significant_uncorrected": 6,
+  "patient_results": [
+    {
+      "frontal_idx": 70,
+      "patient": "patient64609",
+      "group": "near_0.5",
+      "control_scores": [
+        0.5981,
+        0.6086,
+        0.5133,
+        0.5529,
+        0.5207
+      ],
+      "poisoned_scores": [
+        0.3776,
+        0.4683,
+        0.1072,
+        0.2683,
+        0.2175
+      ],
+      "control_mean": 0.5587,
+      "control_std": 0.0435,
+      "poisoned_mean": 0.2878,
+      "poisoned_std": 0.1402,
+      "diff": -0.2709,
+      "ci_95_lo": -0.4397,
+      "ci_95_hi": -0.1022,
+      "t_stat": -4.1279,
+      "df": 4.76,
+      "p_value": 0.0101,
+      "p_method": "exact (scipy)",
+      "sig_uncorrected": true,
+      "sig_bonferroni": false,
+      "alpha_bonferroni": 0.0083
+    },
+    {
+      "frontal_idx": 134,
+      "patient": "patient64673",
+      "group": "near_0.5",
+      "control_scores": [
+        0.64,
+        0.6583,
+        0.5994,
+        0.544,
+        0.548
+      ],
+      "poisoned_scores": [
+        0.1393,
+        0.3592,
+        0.2399,
+        0.4404,
+        0.313
+      ],
+      "control_mean": 0.5979,
+      "control_std": 0.052,
+      "poisoned_mean": 0.2984,
+      "poisoned_std": 0.1149,
+      "diff": -0.2996,
+      "ci_95_lo": -0.4376,
+      "ci_95_hi": -0.1616,
+      "t_stat": -5.3114,
+      "df": 5.57,
+      "p_value": 0.0023,
+      "p_method": "exact (scipy)",
+      "sig_uncorrected": true,
+      "sig_bonferroni": true,
+      "alpha_bonferroni": 0.0083
+    },
+    {
+      "frontal_idx": 12,
+      "patient": "patient64552",
+      "group": "near_0.7",
+      "control_scores": [
+        0.7062,
+        0.6483,
+        0.6837,
+        0.7208,
+        0.68
+      ],
+      "poisoned_scores": [
+        0.4769,
+        0.4522,
+        0.4206,
+        0.5129,
+        0.7329
+      ],
+      "control_mean": 0.6878,
+      "control_std": 0.0277,
+      "poisoned_mean": 0.5191,
+      "poisoned_std": 0.1242,
+      "diff": -0.1687,
+      "ci_95_lo": -0.3267,
+      "ci_95_hi": -0.0107,
+      "t_stat": -2.9644,
+      "df": 4.4,
+      "p_value": 0.0368,
+      "p_method": "exact (scipy)",
+      "sig_uncorrected": true,
+      "sig_bonferroni": false,
+      "alpha_bonferroni": 0.0083
+    },
+    {
+      "frontal_idx": 111,
+      "patient": "patient64650",
+      "group": "near_0.7",
+      "control_scores": [
+        0.8185,
+        0.7634,
+        0.7931,
+        0.6534,
+        0.6516
+      ],
+      "poisoned_scores": [
+        0.5167,
+        0.2873,
+        0.5398,
+        0.4448,
+        0.3244
+      ],
+      "control_mean": 0.736,
+      "control_std": 0.0787,
+      "poisoned_mean": 0.4226,
+      "poisoned_std": 0.113,
+      "diff": -0.3134,
+      "ci_95_lo": -0.459,
+      "ci_95_hi": -0.1678,
+      "t_stat": -5.0908,
+      "df": 7.14,
+      "p_value": 0.0013,
+      "p_method": "exact (scipy)",
+      "sig_uncorrected": true,
+      "sig_bonferroni": true,
+      "alpha_bonferroni": 0.0083
+    },
+    {
+      "frontal_idx": 37,
+      "patient": "patient64577",
+      "group": "near_0.9",
+      "control_scores": [
+        0.9629,
+        0.9663,
+        0.9568,
+        0.941,
+        0.9599
+      ],
+      "poisoned_scores": [
+        0.8491,
+        0.89,
+        0.833,
+        0.6979,
+        0.6592
+      ],
+      "control_mean": 0.9574,
+      "control_std": 0.0098,
+      "poisoned_mean": 0.7858,
+      "poisoned_std": 0.1011,
+      "diff": -0.1715,
+      "ci_95_lo": -0.2976,
+      "ci_95_hi": -0.0455,
+      "t_stat": -3.778,
+      "df": 4.08,
+      "p_value": 0.0188,
+      "p_method": "exact (scipy)",
+      "sig_uncorrected": true,
+      "sig_bonferroni": false,
+      "alpha_bonferroni": 0.0083
+    },
+    {
+      "frontal_idx": 105,
+      "patient": "patient64644",
+      "group": "near_0.9",
+      "control_scores": [
+        0.8991,
+        0.938,
+        0.8853,
+        0.9368,
+        0.8617
+      ],
+      "poisoned_scores": [
+        0.6165,
+        0.4278,
+        0.5147,
+        0.3463,
+        0.2266
+      ],
+      "control_mean": 0.9042,
+      "control_std": 0.0331,
+      "poisoned_mean": 0.4264,
+      "poisoned_std": 0.1502,
+      "diff": -0.4778,
+      "ci_95_lo": -0.6688,
+      "ci_95_hi": -0.2868,
+      "t_stat": -6.9448,
+      "df": 4.39,
+      "p_value": 0.0016,
+      "p_method": "exact (scipy)",
+      "sig_uncorrected": true,
+      "sig_bonferroni": true,
+      "alpha_bonferroni": 0.0083
+    }
+  ]
+}
