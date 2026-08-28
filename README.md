@@ -23,8 +23,10 @@ framework.
 repository. The statistical analysis and threshold-straddling analysis can therefore
 be reproduced directly without rerunning the training pipeline.**
 
-Rerunning the full experiment from scratch requires an A100 GPU and approximately
-12 hours of compute time.
+Rerunning the full experiment from scratch requires an NVIDIA A100 SXM4-40GB GPU
+and approximately 60 hours of compute time — around 16 hours for poison crafting,
+6 hours for control retraining and 40 hours for poisoned retraining across 6 patients.
+Experiments were run on Lambda Labs cloud compute.
 
 ---
 
