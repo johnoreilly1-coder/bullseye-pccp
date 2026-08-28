@@ -53,9 +53,12 @@ TARGET_PATIENTS = {
 }
 
 CONFIG = {
-    "control_results":  "/home/ubuntu/poison-storage/results/control/summary.json",
-    "multirun_dir":     "/home/ubuntu/poison-storage/results/multirun",
-    "output_dir":       "/home/ubuntu/poison-storage/results/analysis",
+    #"control_results":  "/home/ubuntu/poison-storage/results/control/summary.json",
+    #"multirun_dir":     "/home/ubuntu/poison-storage/results/multirun",
+    #"output_dir":       "/home/ubuntu/poison-storage/results/analysis",
+    "control_results":  "results/control/summary.json",
+    "multirun_dir":     "results/multirun",
+    "output_dir":       "results/analysis",
     "alpha":            0.05,
     "n_comparisons":    6,      # Bonferroni correction
     "matched_seeds":    [100, 200, 300, 400, 500],
