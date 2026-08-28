@@ -100,7 +100,7 @@ PYTHONPATH=$(pwd) python analysis/threshold_straddling.py
 
 ---
 
-## Rerunning the Full Experiment (A100 GPU, ~12 hours)
+## Rerunning the Full Experiment (A100 SXM4-40GB, ~60 hours)
 
 ### Step 1 — Craft poison images (one per target patient)
 
