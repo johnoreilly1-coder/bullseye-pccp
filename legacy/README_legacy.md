@@ -11,14 +11,14 @@ corrected experiment.
 
 ## Scripts
 
-### Baseline Model Training
+### Baseline Model Training (Section 5.2)
 
 | Script | Description |
 |---|---|
 | `train.py` | Trains the Stage 2 DenseNet-121 baseline model on the CheXpert frontal training set. Produces `best_model.pt` selected by best validation AUC. |
 | `train_surrogate.py` | Trains the ResNet-50 surrogate ensemble (3 models, seeds 42 / 123 / 456) used for black-box poison crafting. |
 
-### Initial Single-Run Experiments (Section 5.4)
+### Initial Single-Run Experiments (Section 5.3)
 
 These scripts were used to evaluate the attack under a single retraining run per condition
 across white-box and black-box configurations at poisoning rates of 1%, 2% and 5%.
@@ -32,7 +32,7 @@ Results motivated the multi-run experimental design.
 | `retrain_poisoned_whitebox.py` | Retrains the model on the white-box poisoned dataset and records PE classification score for the target patient. |
 | `evaluate.py` | Evaluates a trained model on the CheXpert validation set and records AUC and per-patient PE scores. |
 
-### Dataset Scaling Experiment (Section 5.5)
+### Dataset Scaling Experiment (Section 5.3)
 
 These scripts evaluate attack effectiveness as the training dataset size is reduced from
 the full 191k frontal images down to 10k images.
